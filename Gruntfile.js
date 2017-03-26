@@ -5,7 +5,7 @@ module.exports = function(grunt){
         includeSource:{
             options:{
                 basePath: "parallx",
-                baseUrl: "parallx",
+                baseUrl: "parallx/",
             },
             myTarget: {
                 files:{
