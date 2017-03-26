@@ -1,0 +1,6 @@
+# Node modules
+node_modules/
+npm-debug.log
+
+# Bower components
+lib/bower_components/

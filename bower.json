@@ -1,0 +1,22 @@
+{
+  "name": "parallx",
+  "description": "Simple chart lib",
+  "main": "index.js",
+  "authors": [
+    "vutrungdungbk@gmail.com"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/dungvtdev/parallx",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#^1.6.3"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "parallx",
+  "version": "1.0.0",
+  "description": "Simple chart lib",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dungvtdev/parallx.git"
+  },
+  "author": "vutrungdungbk@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dungvtdev/parallx/issues"
+  },
+  "homepage": "https://github.com/dungvtdev/parallx#readme",
+  "dependencies": {
+    "bower": "^1.8.0"
+  }
+}
