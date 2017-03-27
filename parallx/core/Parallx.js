@@ -29,5 +29,19 @@ var Parallx = {
 
     clone: function (obj) {
         return JSON.parse(JSON.stringify(obj));
+    },
+
+    export: function(exportObject, this_obj){
+        for(var key in exportObject){
+            this_obj[key] = exportObject[key];
+        }
+    },
+
+    inherit: function(prototype, extend){
+        Parallx.export(extend, Parallx.clone(prototype));
+    },
+
+    create: function(ctor, options){
+        Parallx.export(options, new ctor());
     }
 }
