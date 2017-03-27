@@ -1,13 +1,18 @@
-<html>
-    <head>
-        <title>Include</title>
-    </head>
+<html ng-app="parallx">
 
-    <body>
-        <!-- lib -->
-        <script src="lib/bower_components/d3/d3.js"></script>
-        <script src="lib/bower_components/angular/angular.js"></script>
-        <!-- JSfiles -->
-        <!-- include: "ordering":"top-down", "type": "js", "files":["__testbed/**/*.js", "angularlib/**/*.js", "d3lib/**/*/js"] -->
-    </body>
+<head>
+    <title>Include</title>
+</head>
+
+<body>
+    <data-bus-core controller-as="vm">
+        <p>{{a}}</p>
+    </data-bus-core>
+    <!-- lib -->
+    <script src="lib/bower_components/d3/d3.js"></script>
+    <script src="lib/bower_components/angular/angular.js"></script>
+    <!-- JSfiles -->
+    <!-- include: "ordering":"top-down", "type": "js", "files":["__testbed/**/*.js", "angularlib/**/*.js", "d3lib/**/*/js"] -->
+</body>
+
 </html>

@@ -3,7 +3,7 @@
 
     angular
         .module('parallx.dataview.table', [])
-        .directive('DataTable', DataTableFn)
+        .directive('dataTable', DataTableFn)
 
     function DataTableFn(){
         return{

@@ -1,17 +1,24 @@
-<html>
-    <head>
-        <title>Include</title>
-    </head>
+<html ng-app="parallx">
 
-    <body>
-        <!-- lib -->
-        <script src="lib/bower_components/d3/d3.js"></script>
-        <script src="lib/bower_components/angular/angular.js"></script>
-        <!-- JSfiles -->
-        <script src="parallx/__testbed/d3_testbed.js"></script>
-        <script src="parallx/angularlib/parallx.module.js"></script>
-        <script src="parallx/angularlib/removeMe.js"></script>
-        <script src="parallx/angularlib/dataview/dataview.module.js"></script>
-        <script src="parallx/angularlib/dataview/table/table.module.js"></script>
-    </body>
+<head>
+    <title>Include</title>
+</head>
+
+<body>
+    <data-bus-core controller-as="vm">
+        <p>{{vm.a}}</p>
+    </data-bus-core>
+    <!-- lib -->
+    <script src="lib/bower_components/d3/d3.js"></script>
+    <script src="lib/bower_components/angular/angular.js"></script>
+    <!-- JSfiles -->
+    <script src="parallx/__testbed/d3_testbed.js"></script>
+    <script src="parallx/angularlib/parallx.module.js"></script>
+    <script src="parallx/angularlib/removeMe.js"></script>
+    <script src="parallx/angularlib/datacontroller/datacontroller.module.js"></script>
+    <script src="parallx/angularlib/datacontroller/databus.directive.js"></script>
+    <script src="parallx/angularlib/dataview/dataview.module.js"></script>
+    <script src="parallx/angularlib/dataview/table/table.module.js"></script>
+</body>
+
 </html>
