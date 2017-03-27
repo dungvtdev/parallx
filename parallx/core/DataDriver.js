@@ -24,8 +24,8 @@ Parallx.DataDriver = function (service) {
     }
 
     function _addOneObserver(obs) {
-        if (!(observe in observeList)) {
-            observeList.push(observe)
+        if (!(obs in observeList)) {
+            observeList.push(obs)
         }
     }
 
@@ -43,7 +43,7 @@ Parallx.DataDriver = function (service) {
     }
 
     function _removeOneObserver(obs) {
-        var find = observeList.indexOf(observe);
+        var find = observeList.indexOf(obs);
         if (find >= 0) {
             observeList.splice(find, 1);
         }
@@ -56,7 +56,7 @@ Parallx.DataDriver = function (service) {
         _isDirty = false;
     }
 
-    function setDataService(service) {
+    function setDataServiceFn(service) {
         dataService = service;
     }
 
@@ -77,7 +77,6 @@ Parallx.DataDriver = function (service) {
                 parser = new observe.seriesParserClass(queriedData);
                 parserDict[observe.seriesParserClass.name] = parser;
             }
-
             parser.parse(observe);
         });
     }
@@ -122,7 +121,7 @@ Parallx.DataDriver = function (service) {
         *  name truyen vao onData(name)
         * }
         */
-    function Observe() {
+    function Observer() {
         this.name = ""
         this.params = null;
         this.onData = null;

@@ -20,7 +20,7 @@
             var index = _findChanelWithService(dataService);
 
             if (index < 0) {
-                chanels.push(Parallx.create(Chanels,{
+                chanels.push(Parallx.create(Chanels, {
                     dataServiceAsKey: dataService,
                     driver: new Parallx.DataDriver(dataService),
                     interval: interval,
@@ -41,19 +41,19 @@
             }
         }
 
-        function flush() {
+        function flushFn() {
             // run loop of chanel if not running, or stop it
-            chanels.forEach(function(cl) {
-                if(cl.driver.hasObservers()){
+            chanels.forEach(function (cl) {
+                if (cl.driver.hasObservers()) {
                     //start it
-                    if(!cl.isRunning){
+                    if (!cl.isRunning) {
                         loop(cl);
                         cl.loopId = setInterval(loop(cl), cl.interval);
                         cl.isRunning = true;
                     }
-                }else{
+                } else {
                     // else stop it
-                    if(cl.isRunning){
+                    if (cl.isRunning) {
                         clearInterval(cl.loopId);
                         cl.isRunning = false;
                     }
@@ -61,8 +61,11 @@
             });
         }
 
-        function loop(chanel){
-            chanel.driver.queryData();
+        function loop(chanel) {
+            return function () {
+                console.log("loop");
+                chanel.driver.queryData();
+            }
         }
 
         function _findChanelWithService(dataService) {

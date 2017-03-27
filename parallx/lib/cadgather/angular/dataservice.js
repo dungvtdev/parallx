@@ -5,7 +5,7 @@
         .module('parallx.lib.cadgather', [])
         .factory('ParallxCadDataService', ParallxCadDataService);
 
-    ParallxCadDataService.$inject = ["$http", "$log"]
+    ParallxCadDataService.$inject = ["$http", "$log", 'DataFileService']
 
     function ParallxCadDataService($http, $log, dataAdapter){
         dataAdapter = dataAdapter || {
@@ -13,24 +13,19 @@
         }
 
         return {
-
             // default dataservice
             updateQuerySchema: updateQuerySchemaFn,
-            queryFn: queryFn,
+            queryData: queryDataFn,
         }
 
         function updateQuerySchemaFn(observeListMeta){
 
         }
 
-        function queryFn(callback){
+        function queryDataFn(callback){
             dataAdapter.getData()
                 .then(function(data){
                     callback(data);
-                })
-                .catch(function(error){
-                    $log.warn("Can't get data in ParallxCadDataService.")
-                    callback(null);
                 })
         }
 
