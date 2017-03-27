@@ -27,7 +27,7 @@
                 }));
             }
             // } else {
-            //     $log.warning('Duplicate register Chanel to DataBus, DataService: ' + dataService);
+            //     $log.warn('Duplicate register Chanel to DataBus, DataService: ' + dataService);
             // }
         }
 

@@ -1,0 +1,65 @@
+<html ng-app="app">
+
+<head>
+    <title>Include</title>
+</head>
+
+<body>
+
+    <div ng-controller="MyCtrl">
+
+    </div>
+    <!-- lib -->
+    <script src="lib/bower_components/d3/d3.js"></script>
+    <script src="lib/bower_components/angular/angular.js"></script>
+    <!-- JSfiles -->
+
+    <script>
+        var app = angular.module("app", []);
+
+        app.controller('MyCtrl', function ($scope, $http) {
+            getxx()
+                .then(function (resp) {
+                    console.log("then2");
+                    console.log(resp);
+                })
+                .catch(function (error) {
+                    console.log("catch2");
+                    console.log(error)
+                })
+
+            return {}
+
+            function getxx() {
+                return $http.get("http://localhost:3002/index.html")
+                    .then(function (resp) {
+                        console.log("then1");
+                        return resp;
+                    })
+                    /*.catch(function (error) {
+                        console.log("catch1");
+                        return error;
+                    })*/
+            }
+        });
+    </script>
+</body>
+
+</html>
+
+<!-- 
+return:
+#if ok
+    then1
+    then2
+    object resp
+
+#if error
+    catch1
+    then2
+    object error
+
+#if error and comment catch1
+    catch2
+    object error
+-->
