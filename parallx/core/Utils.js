@@ -13,3 +13,14 @@ Parallx.Utils = {
         return -1;
     },
 }
+
+Parallx.namespace('Parallx.Utils.URI');
+
+Parallx.Utils.URI = {
+    encodeParams: function(params){
+        var strs = Parallx.keys(params).map(function(attr){
+            return attr+"="+params[attr].join(',');
+        })
+        return strs.join('&');
+    }
+}

@@ -17,7 +17,7 @@
 
         var observer1 = {
             name : "data1",
-            params : null,
+            params : ['cpu_usage_total./'],
             onData : function(){},
             seriesParserClass: Parallx.Lib.Cadgather.SeriesParser,
         }

@@ -19,7 +19,8 @@
         }
 
         function updateQuerySchemaFn(observeListMeta){
-
+            console.log('update schema cad dataservice');
+            console.log(observeListMeta);
         }
 
         function queryDataFn(callback){

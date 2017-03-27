@@ -52,7 +52,7 @@ Parallx.DataDriver = function (service) {
     function flushUpdateFn() {
         if (!_isDirty)
             return;
-        dataService.updateQuerySchema();
+        dataService.updateQuerySchema(_getObserverParams());
         _isDirty = false;
     }
 
@@ -79,6 +79,12 @@ Parallx.DataDriver = function (service) {
             }
             parser.parse(observe);
         });
+    }
+
+    function _getObserverParams(){
+        return observeList.map(function(observer){
+            return observer.params;
+        })
     }
 
     Parallx.export({
