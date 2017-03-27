@@ -106,6 +106,7 @@ Parallx.DataDriver = function (service) {
     function DataService() {
         // update lai khi them, bot observe, truyen vao meta cua observes de lay
         // thong tin
+        // observeListMeta: [params, ]
         this.updateQuerySchema = function (observeListMeta) { }
 
         // lay du lieu, dong thoi goi callback khi xong
