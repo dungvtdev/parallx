@@ -1,47 +1,25 @@
-<html ng-app="app">
+<html ng-app="parallx">
 
 <head>
     <title>Include</title>
 </head>
 
 <body>
-
-    <div ng-controller="MyCtrl1">
-        <my-directive>
-            <div ng-controller="MyCtrl2">{{d}}</div>
-        </my-directive>
+    <div ng-controller='MainCtrl'>
+        <p>This is table</p>
     </div>
     <!-- lib -->
     <script src="lib/bower_components/d3/d3.js"></script>
     <script src="lib/bower_components/angular/angular.js"></script>
     <!-- JSfiles -->
-    
-    <script>
-        var app = angular.module("app", []);
-
-        app.controller("MyCtrl1", function($scope){
-            console.log("Ctrl1");
-            console.log($scope);
-            $scope.a1 = 10;
-        });
-
-        app.controller("MyCtrl2", function($scope){
-            console.log("Ctrl2");
-            console.log($scope);
-            $scope.a2 = 20;
-        });
-
-        app.directive("myDirective", function(){
-            return {
-                scope: {},
-                link: function(scope){
-                    console.log("directive");
-                    console.log(scope);
-                    scope.d = 100;
-                }
-            }
-        })
-    </script>
+    <script src="parallx/__testbed/d3_testbed.js"></script>
+    <script src="parallx/angularlib/parallx.js"></script>
+    <script src="parallx/angularlib/removeMe.js"></script>
+    <script src="parallx/angularlib/datacontroller/datacontroller.js"></script>
+    <script src="parallx/angularlib/datacontroller/directives/databus.directive.js"></script>
+    <script src="parallx/angularlib/datacontroller/services/databus.service.js"></script>
+    <script src="parallx/angularlib/dataview/dataview.js"></script>
+    <script src="parallx/angularlib/dataview/table/table.js"></script>
 </body>
 
 </html>
