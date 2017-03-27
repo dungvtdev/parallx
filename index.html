@@ -1,24 +1,47 @@
-<html ng-app="parallx">
+<html ng-app="app">
 
 <head>
     <title>Include</title>
 </head>
 
 <body>
-    <data-bus-core controller-as="vm">
-        <p>{{vm.a}}</p>
-    </data-bus-core>
+
+    <div ng-controller="MyCtrl1">
+        <my-directive>
+            <div ng-controller="MyCtrl2">{{d}}</div>
+        </my-directive>
+    </div>
     <!-- lib -->
     <script src="lib/bower_components/d3/d3.js"></script>
     <script src="lib/bower_components/angular/angular.js"></script>
     <!-- JSfiles -->
-    <script src="parallx/__testbed/d3_testbed.js"></script>
-    <script src="parallx/angularlib/parallx.module.js"></script>
-    <script src="parallx/angularlib/removeMe.js"></script>
-    <script src="parallx/angularlib/datacontroller/datacontroller.module.js"></script>
-    <script src="parallx/angularlib/datacontroller/databus.directive.js"></script>
-    <script src="parallx/angularlib/dataview/dataview.module.js"></script>
-    <script src="parallx/angularlib/dataview/table/table.module.js"></script>
+    
+    <script>
+        var app = angular.module("app", []);
+
+        app.controller("MyCtrl1", function($scope){
+            console.log("Ctrl1");
+            console.log($scope);
+            $scope.a1 = 10;
+        });
+
+        app.controller("MyCtrl2", function($scope){
+            console.log("Ctrl2");
+            console.log($scope);
+            $scope.a2 = 20;
+        });
+
+        app.directive("myDirective", function(){
+            return {
+                scope: {},
+                link: function(scope){
+                    console.log("directive");
+                    console.log(scope);
+                    scope.d = 100;
+                }
+            }
+        })
+    </script>
 </body>
 
 </html>
