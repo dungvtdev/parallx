@@ -18,5 +18,8 @@
   "homepage": "https://github.com/dungvtdev/parallx#readme",
   "dependencies": {
     "bower": "^1.8.0"
+  },
+  "devDependencies": {
+    "grunt-include-source": "^1.1.0"
   }
 }

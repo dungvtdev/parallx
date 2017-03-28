@@ -17,6 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "angularjs#^1.6.3"
+    "angular": "angularjs#^1.6.3",
+    "d3": "^4.7.4"
   }
 }

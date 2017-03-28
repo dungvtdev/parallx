@@ -1,6 +1,6 @@
 Parallx.namespace("Parallx.DataDriver.Series");
 
-Parallx.DataDirver.Series = function (args) {
+Parallx.DataDriver.Series = function (args) {
     'use strict'
 
     args = args || {};
@@ -50,7 +50,7 @@ Parallx.DataDriver.TimeValueParseFactory = (function () {
     }
 
     return {
-        getParser: getParserFn,
+        getParser: getParser,
         Type : Type
     }
 })();

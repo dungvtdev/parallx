@@ -1,0 +1,47 @@
+<html ng-app="app">
+
+<head>
+    <title>Include</title>
+</head>
+
+<body>
+
+    <div ng-controller="MyCtrl1">
+        <my-directive>
+            <div ng-controller="MyCtrl2">{{d}}</div>
+        </my-directive>
+    </div>
+    <!-- lib -->
+    <script src="lib/bower_components/d3/d3.js"></script>
+    <script src="lib/bower_components/angular/angular.js"></script>
+    <!-- JSfiles -->
+    
+    <script>
+        var app = angular.module("app", []);
+
+        app.controller("MyCtrl1", function($scope){
+            console.log("Ctrl1");
+            console.log($scope);
+            $scope.a1 = 10;
+        });
+
+        app.controller("MyCtrl2", function($scope){
+            console.log("Ctrl2");
+            console.log($scope);
+            $scope.a2 = 20;
+        });
+
+        app.directive("myDirective", function(){
+            return {
+                scope: {},
+                link: function(scope){
+                    console.log("directive");
+                    console.log(scope);
+                    scope.d = 100;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

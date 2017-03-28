@@ -1,0 +1,20 @@
+<html ng-app="testapp">
+
+<head>
+    <title>Include</title>
+</head>
+
+<body>
+    <div ng-controller='MainCtrl'>
+        <p>This is table</p>
+    </div>
+    <!-- lib -->
+    <script src="lib/bower_components/d3/d3.js"></script>
+    <script src="lib/bower_components/angular/angular.js"></script>
+    <!-- JSfiles -->
+    <!-- include: "ordering":"top-down", "type": "js", "files":["__testbed/**/*.js", "core/**/*.js", "angularcore/**/*.js", "d3lib/**/*/js", "lib/**/*.js"] -->
+    <script src="data_test/data.local.js"></script>
+    <script src="app/MainCtrl.js"></script>
+</body>
+
+</html>

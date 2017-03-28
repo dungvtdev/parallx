@@ -1,25 +1,49 @@
 Parallx.namespace('Parallx.DataDriver');
 
-Parallx.DataDriver = (function () {
+Parallx.DataDriver = function (service) {
     'use strict'
 
     var _isDirty = false;
     var observeList = [];
 
     // type: DataService
-    var dataService = null;
+    var dataService = service || null;
 
-    function addObserveFn(observe) {
+    function hasObserversFn() {
+        return observeList && observeList.length > 0;
+    }
+
+    function addObserversFn(observers) {
         _isDirty = true;
-        if (!(observe in observeList)) {
-            observeList.push(observe)
+        if (observers instanceof Array) {
+            for (var i = 0; i < observers.length; i++)
+                _addOneObserver(observers[i]);
+        } else {
+            _addOneObserver(observers)
+        }
+    }
+
+    function _addOneObserver(obs) {
+        if (!(obs in observeList)) {
+            observeList.push(obs)
         }
     }
 
     // param: observe class Observe
-    function removeObserveFn(observe) {
+    function removeObserversFn(observers) {
         _isDirty = true;
-        var find = observeList.indexOf(observe);
+        if (observers == undefined) {
+            observeList = []
+        } else if (observers instanceof Array) {
+            for (var i = 0; i < observers.length; i++)
+                _removeOneObserver(observers[i]);
+        } else {
+            _removeOneObserver(observers);
+        }
+    }
+
+    function _removeOneObserver(obs) {
+        var find = observeList.indexOf(obs);
         if (find >= 0) {
             observeList.splice(find, 1);
         }
@@ -28,11 +52,11 @@ Parallx.DataDriver = (function () {
     function flushUpdateFn() {
         if (!_isDirty)
             return;
-        dataService.updateQuerySchema();
+        dataService.updateQuerySchema(_getObserverParams());
         _isDirty = false;
     }
 
-    function setDataService(service) {
+    function setDataServiceFn(service) {
         dataService = service;
     }
 
@@ -49,23 +73,32 @@ Parallx.DataDriver = (function () {
         observeList.forEach(function (observe) {
             if (observe.seriesParserClass.name in parserDict) {
                 parser = parserDict[observe.seriesParserClass.name]
-            }else{
+            } else {
                 parser = new observe.seriesParserClass(queriedData);
                 parserDict[observe.seriesParserClass.name] = parser;
             }
-            
             parser.parse(observe);
         });
     }
 
-    return {
-        addObserve: addObserveFn,
-        removeObserve: removeObserveFn,
+    function _getObserverParams(){
+        return observeList.map(function(observer){
+            return observer.params;
+        })
+    }
+
+    Parallx.export({
+        addObservers: addObserversFn,
+        removeObservers: removeObserversFn,
         flushUpdate: flushUpdateFn,
         setDataService: setDataServiceFn,
 
+        hasObservers: hasObserversFn,
+
         queryData: queryDataFn,
-    }
+    }, this)
+
+    return;
 
     /**
      *  Prototypes use in this class, the program not run to here normally
@@ -78,6 +111,7 @@ Parallx.DataDriver = (function () {
     function DataService() {
         // update lai khi them, bot observe, truyen vao meta cua observes de lay
         // thong tin
+        // observeListMeta: [params, ]
         this.updateQuerySchema = function (observeListMeta) { }
 
         // lay du lieu, dong thoi goi callback khi xong
@@ -93,7 +127,7 @@ Parallx.DataDriver = (function () {
         *  name truyen vao onData(name)
         * }
         */
-    function Observe() {
+    function Observer() {
         this.name = ""
         this.params = null;
         this.onData = null;
@@ -107,4 +141,4 @@ Parallx.DataDriver = (function () {
             observe.onData(observe.name, null);
         }
     }
-})();
+};

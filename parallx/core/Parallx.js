@@ -3,7 +3,7 @@ var Parallx = {
 
         var parts = namespace.split('.');
 
-        var parent = Rickshaw;
+        var parent = Parallx;
 
         for (var i = 1, length = parts.length; i < length; i++) {
             var currentPart = parts[i];
@@ -29,5 +29,23 @@ var Parallx = {
 
     clone: function (obj) {
         return JSON.parse(JSON.stringify(obj));
+    },
+
+    export: function(exportObject, this_obj){
+        for(var key in exportObject){
+            this_obj[key] = exportObject[key];
+        }
+    },
+
+    inherit: function(prototype, extend){
+        var container = Parallx.clone(prototype);
+        Parallx.export(extend, container);
+        return container;
+    },
+
+    create: function(ctor, options){
+        var obj = new ctor();
+        Parallx.export(options, obj);
+        return obj;
     }
 }
