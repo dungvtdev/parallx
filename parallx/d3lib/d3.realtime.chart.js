@@ -13,6 +13,9 @@ Parallx.d3lib.Chart.RealTimeChart = function (params) {
         _timeNow = params['timeNow'] || Date.now() / 1000,
         _element = params['element'];
 
+    var axisGapX = 50,
+        axisGapY = 50;
+
     if (!_element) {
         throw new ReferenceError("Parallx Chart must have element in params");
     }
@@ -38,14 +41,14 @@ Parallx.d3lib.Chart.RealTimeChart = function (params) {
     // x do rong = _limit -1 de che di phan tu cuoi cung, giam cam giac bi giat
     var x = d3.time.scale()
         .domain([_timeNow - (_limit - 1) * _duration, _timeNow - _duration])
-        .range([0, _width]);
+        .range([axisGapX, _width + axisGapX]);
 
     var y = d3.scale.linear()
         .domain([0, 100])
         .range([_height, 0])
 
     var line = d3.svg.line()
-        .interpolate('basis')
+        .interpolate('linear')
         .x(function (d, i) {
             return x(d[0]);
         })
@@ -55,13 +58,18 @@ Parallx.d3lib.Chart.RealTimeChart = function (params) {
 
     var svg = d3.select(_element).append('svg')
         .attr('class', 'chart')
-        .attr('width', _width)
-        .attr('height', _height + 50)
+        .attr('width', _width + axisGapX+100)
+        .attr('height', _height + axisGapY)
 
-    var axis = svg.append('g')
+    var xaxis = svg.append('g')
         .attr('class', 'x axis')
         .attr('transform', 'translate(0,' + _height + ')')
         .call(x.axis = d3.svg.axis().scale(x).orient('bottom'))
+
+    var yaxis = svg.append('g')
+        .attr('class', 'y axis')
+        .attr('transform', 'translate(' + axisGapX + ',0)')
+        .call(y.axis = d3.svg.axis().scale(y).orient('left'))
 
     var paths = svg.append('g')
 
@@ -120,18 +128,18 @@ Parallx.d3lib.Chart.RealTimeChart = function (params) {
         x.domain([_timeNow - (_limit - 1) * _duration, _timeNow - _duration])
 
         // Slide x-axis left
-        axis.transition()
+        xaxis.transition()
             .duration(_duration * 1000)
             .ease('linear')
             .call(x.axis)
 
         // Slide paths left
-        paths.attr('transform', 'transform(0,0)')
+        paths.attr('transform', 'translate(0,0)')
             .transition()
             .duration(_duration * 1000)
             .ease('linear')
             // translate = - duration/(do dai x)
-            .attr('transform', 'translate(' + x(_timeNow - _limit * _duration) + ')')
+            .attr('transform', 'translate(' + x(_timeNow - _limit * _duration)-axisGapX + ')')
 
         // console.log(x(_timeNow - (_limit - 2) * _duration))
     }

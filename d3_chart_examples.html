@@ -92,7 +92,7 @@
             .attr('width', width)
             .attr('height', height + 50)
 
-        var axis = svg.append('g')
+        var xaxis = svg.append('g')
             .attr('class', 'x axis')
             .attr('transform', 'translate(0,' + height + ')')
             .call(x.axis = d3.svg.axis().scale(x).orient('bottom'))
