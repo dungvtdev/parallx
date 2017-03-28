@@ -34,8 +34,10 @@ Parallx.d3lib.Chart.RealTimeChart = function (params) {
     var colorGenerate = Parallx.d3lib.Color.ColorFactory.getSimpleColor();
 
     // init
+
+    // x do rong = _limit -1 de che di phan tu cuoi cung, giam cam giac bi giat
     var x = d3.time.scale()
-        .domain([_timeNow - (_limit - 1) * _duration, _timeNow])
+        .domain([_timeNow - (_limit - 1) * _duration, _timeNow - _duration])
         .range([0, _width]);
 
     var y = d3.scale.linear()
@@ -115,7 +117,7 @@ Parallx.d3lib.Chart.RealTimeChart = function (params) {
         }
 
         // Shift domain
-        x.domain([_timeNow - (_limit - 1) * _duration, _timeNow])
+        x.domain([_timeNow - (_limit - 1) * _duration, _timeNow - _duration])
 
         // Slide x-axis left
         axis.transition()
@@ -124,13 +126,14 @@ Parallx.d3lib.Chart.RealTimeChart = function (params) {
             .call(x.axis)
 
         // Slide paths left
-        paths.attr('transform', null)
+        paths.attr('transform', 'transform(0,0)')
             .transition()
             .duration(_duration * 1000)
             .ease('linear')
+            // translate = - duration/(do dai x)
             .attr('transform', 'translate(' + x(_timeNow - _limit * _duration) + ')')
 
-        console.log(x(_timeNow - (_limit - 2) * _duration))
+        // console.log(x(_timeNow - (_limit - 2) * _duration))
     }
 
     function _addGroup(name, values) {
