@@ -2,17 +2,48 @@
 
 <head>
     <title>Include</title>
+
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        
+        .graph .axis {
+            stroke-width: 1;
+        }
+        
+        .graph .axis .tick line {
+            stroke: black;
+        }
+        
+        .graph .axis .tick text {
+            fill: black;
+            font-size: 0.7em;
+        }
+        
+        .graph .axis .domain {
+            fill: none;
+            stroke: black;
+        }
+        
+        .graph .group {
+            fill: none;
+            stroke: black;
+            stroke-width: 1.5;
+        }
+    </style>
 </head>
 
 <body>
     <div ng-controller='MainCtrl'>
         <p>This is table</p>
+        <time-series-chart></time-series-chart>
     </div>
     <!-- lib -->
     <script src="lib/bower_components/d3/d3.js"></script>
     <script src="lib/bower_components/angular/angular.js"></script>
     <!-- JSfiles -->
-    <!-- include: "ordering":"top-down", "type": "js", "files":["__testbed/**/*.js", "core/**/*.js", "angularcore/**/*.js", "d3lib/**/*/js", "lib/**/*.js"] -->
+    <!-- include: "ordering":"top-down", "type": "js", "files":["__testbed/**/*.js", "core/**/*.js", "angularcore/**/*.js", "d3lib/**/*.js", "lib/**/*.js"] -->
     <script src="data_test/data.local.js"></script>
     <script src="app/MainCtrl.js"></script>
 </body>

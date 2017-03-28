@@ -2,11 +2,42 @@
 
 <head>
     <title>Include</title>
+
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        
+        .graph .axis {
+            stroke-width: 1;
+        }
+        
+        .graph .axis .tick line {
+            stroke: black;
+        }
+        
+        .graph .axis .tick text {
+            fill: black;
+            font-size: 0.7em;
+        }
+        
+        .graph .axis .domain {
+            fill: none;
+            stroke: black;
+        }
+        
+        .graph .group {
+            fill: none;
+            stroke: black;
+            stroke-width: 1.5;
+        }
+    </style>
 </head>
 
 <body>
     <div ng-controller='MainCtrl'>
         <p>This is table</p>
+        <time-series-chart></time-series-chart>
     </div>
     <!-- lib -->
     <script src="lib/bower_components/d3/d3.js"></script>
@@ -20,14 +51,18 @@
     <script src="parallx/angularcore/datacontroller/services/databus.service.js"></script>
     <script src="parallx/angularcore/dataview/dataview.js"></script>
     <script src="parallx/angularcore/dataview/table/table.js"></script>
+    <script src="parallx/angularcore/dataview/timeSeriesChart/timeserieschart.js"></script>
     <script src="parallx/core/Parallx.js"></script>
     <script src="parallx/core/DataDriver.Series.js"></script>
     <script src="parallx/core/DataDriver.js"></script>
     <script src="parallx/core/Exceptions.js"></script>
     <script src="parallx/core/RemoveMe.js"></script>
     <script src="parallx/core/Utils.js"></script>
+    <script src="parallx/d3lib/d3.color.js"></script>
+    <script src="parallx/d3lib/d3.realtime.chart.js"></script>
     <script src="parallx/lib/ParallxLib.js"></script>
     <script src="parallx/lib/parallx.lib.js"></script>
+    <script src="parallx/lib/cadgather/QueryFactory.js"></script>
     <script src="parallx/lib/cadgather/SeriesParser.js"></script>
     <script src="parallx/lib/cadgather/angular/dataservice.js"></script>
     <script src="data_test/data.local.js"></script>

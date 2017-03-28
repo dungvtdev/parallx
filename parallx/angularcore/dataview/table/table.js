@@ -2,7 +2,7 @@
     'use strict'
 
     angular
-        .module('parallx.dataview.table', [])
+        .module('parallx.dataview.table')
         .directive('dataTable', DataTableFn)
 
     function DataTableFn(){

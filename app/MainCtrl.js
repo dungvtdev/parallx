@@ -22,8 +22,8 @@
             seriesParserClass: Parallx.Lib.Cadgather.SeriesParser,
         }
 
-        dataBus.registerObserver(dataService, observer1);
-        dataBus.flush();
+        // dataBus.registerObserver(dataService, observer1);
+        // dataBus.flush();
 
         function onData(observerName, data){
             console.log(data);
