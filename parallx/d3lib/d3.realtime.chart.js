@@ -8,13 +8,17 @@ Parallx.namespace('Parallx.d3lib.Chart.RealTimeChart');
 Parallx.d3lib.Chart.RealTimeChart = function (params) {
     var _width = params['width'] || 500,
         _height = params['height'] || 200,
-        _limit = params['limit'] || 60,
+        _limit = params['limit'] || 10,
         _duration = params['duration'] || 0.75,
         _timeNow = params['timeNow'] || Date.now() / 1000,
         _element = params['element'];
 
-    var axisGapX = 50,
-        axisGapY = 50;
+    var margin = {top: 10, right: 0, bottom: 30, left: 300};
+    _canvasWidth = _width;
+    _canvasHeight = _height;
+
+    _width -= margin.left+ margin.right;
+    _height -= margin.top + margin.bottom;
 
     if (!_element) {
         throw new ReferenceError("Parallx Chart must have element in params");
@@ -41,14 +45,14 @@ Parallx.d3lib.Chart.RealTimeChart = function (params) {
     // x do rong = _limit -1 de che di phan tu cuoi cung, giam cam giac bi giat
     var x = d3.time.scale()
         .domain([_timeNow - (_limit - 1) * _duration, _timeNow - _duration])
-        .range([axisGapX, _width + axisGapX]);
+        .range([0, _width])
 
     var y = d3.scale.linear()
         .domain([0, 100])
         .range([_height, 0])
 
     var line = d3.svg.line()
-        .interpolate('linear')
+        .interpolate('basis-open')
         .x(function (d, i) {
             return x(d[0]);
         })
@@ -56,19 +60,22 @@ Parallx.d3lib.Chart.RealTimeChart = function (params) {
             return y(d[1]);
         })
 
-    var svg = d3.select(_element).append('svg')
-        .attr('class', 'chart')
-        .attr('width', _width + axisGapX+100)
-        .attr('height', _height + axisGapY)
+    var svg = d3.select(_element)
+        .append('svg')
+            .attr('class', 'chart')
+            .attr('width', _canvasWidth)
+            .attr('height', _canvasHeight)
+        .append("g")
+            .attr("transform","translate("+margin.left+","+margin.top+")");
+
 
     var xaxis = svg.append('g')
         .attr('class', 'x axis')
         .attr('transform', 'translate(0,' + _height + ')')
-        .call(x.axis = d3.svg.axis().scale(x).orient('bottom'))
+        .call(x.axis = d3.svg.axis().scale(x).orient('bottom').ticks(20, "s"))
 
     var yaxis = svg.append('g')
         .attr('class', 'y axis')
-        .attr('transform', 'translate(' + axisGapX + ',0)')
         .call(y.axis = d3.svg.axis().scale(y).orient('left'))
 
     var paths = svg.append('g')
@@ -108,8 +115,8 @@ Parallx.d3lib.Chart.RealTimeChart = function (params) {
             while (group.dataPool.length > 0) {
                 cur = group.dataPool[0];
                 if (cur[0] <= _timeNow) {
-                    console.log("push");
-                    console.log(cur);
+                    // console.log("push");
+                    // console.log(cur);
                     group.data.push(cur);
                     group.dataPool.shift();
                 } else {
@@ -139,7 +146,7 @@ Parallx.d3lib.Chart.RealTimeChart = function (params) {
             .duration(_duration * 1000)
             .ease('linear')
             // translate = - duration/(do dai x)
-            .attr('transform', 'translate(' + x(_timeNow - _limit * _duration)-axisGapX + ')')
+            .attr('transform', 'translate(' + x(_timeNow - _limit * _duration) + ')')
 
         // console.log(x(_timeNow - (_limit - 2) * _duration))
     }
